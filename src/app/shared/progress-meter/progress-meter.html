@@ -1,0 +1,9 @@
+<div class="meter" aria-label="Challenge progress">
+  <div class="meter__copy">
+    <span>Stage {{ current() }} of {{ total() }}</span>
+    <strong>{{ (current() / total()) * 100 | number: '1.0-0' }}%</strong>
+  </div>
+  <div class="meter__track" aria-hidden="true">
+    <span class="meter__fill" [style.width.%]="(current() / total()) * 100"></span>
+  </div>
+</div>

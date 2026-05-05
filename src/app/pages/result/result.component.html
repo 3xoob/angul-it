@@ -1,0 +1,39 @@
+<main class="result-shell" id="main-content">
+  @if (progress(); as session) {
+    <section class="result" aria-labelledby="result-title">
+      <p class="eyebrow">Session verified</p>
+      <h1 id="result-title">You proved you are not a bot.</h1>
+      <p class="summary">All {{ challenges().length }} stages passed with {{ totalAttempts() }} total attempts in {{ elapsedSeconds() }} seconds. Challenge complete.</p>
+
+      <dl class="stats">
+        <div>
+          <dt>Started</dt>
+          <dd>{{ session.startedAt | date: 'shortTime' }}</dd>
+        </div>
+        <div>
+          <dt>Completed</dt>
+          <dd>{{ session.completedAt | date: 'shortTime' }}</dd>
+        </div>
+        <div>
+          <dt>Session</dt>
+          <dd>{{ session.sessionId.slice(0, 8) }}</dd>
+        </div>
+      </dl>
+
+      <div class="review" aria-label="Challenge summary">
+        @for (challenge of challenges(); track challenge.id; let index = $index) {
+          <article>
+            <span>{{ index + 1 }}</span>
+            <div>
+              <h2>{{ challenge.title }}</h2>
+              <p>{{ attemptsFor(challenge.id) }} attempt{{ attemptsFor(challenge.id) === 1 ? '' : 's' }}</p>
+            </div>
+            <strong>Passed</strong>
+          </article>
+        }
+      </div>
+
+      <button class="button button--primary" type="button" (click)="restart()">Restart challenge</button>
+    </section>
+  }
+</main>

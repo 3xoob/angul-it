@@ -1,0 +1,82 @@
+.home-shell {
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+  margin: 0 auto;
+  max-width: 72rem;
+  min-height: 100svh;
+  padding: clamp(1.25rem, 5vw, 4rem);
+  place-content: center;
+}
+
+.hero {
+  max-width: 50rem;
+}
+
+.eyebrow {
+  color: var(--color-primary-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+h1 {
+  color: var(--color-text);
+  font-size: clamp(2.5rem, 11vw, 6.5rem);
+  letter-spacing: -0.08em;
+  line-height: 0.88;
+  margin: 0;
+  max-width: 12ch;
+}
+
+.hero__copy {
+  color: var(--color-muted);
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
+  margin: 1.5rem 0 0;
+  max-width: 64ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.brief {
+  display: grid;
+  gap: 1rem;
+}
+
+.brief article {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1.4rem;
+  padding: 1.2rem;
+}
+
+.brief span {
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.brief h2 {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.brief p {
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (min-width: 760px) {
+  .brief {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

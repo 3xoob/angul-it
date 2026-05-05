@@ -1,0 +1,31 @@
+.meter {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.meter__copy {
+  align-items: center;
+  color: var(--color-muted);
+  display: flex;
+  font-size: 0.9rem;
+  justify-content: space-between;
+}
+
+.meter__copy strong {
+  color: var(--color-text);
+}
+
+.meter__track {
+  background: var(--color-surface-raised);
+  border-radius: 999px;
+  height: 0.55rem;
+  overflow: hidden;
+}
+
+.meter__fill {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-success));
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  transition: width 250ms var(--ease-out);
+}

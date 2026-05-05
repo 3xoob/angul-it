@@ -1,0 +1,77 @@
+<main class="challenge-shell" id="main-content">
+  @if (currentChallenge(); as challenge) {
+    <section class="challenge" aria-labelledby="challenge-title">
+      <app-progress-meter [current]="currentPosition()" [total]="total()" />
+
+      <div class="challenge__heading">
+        <p class="eyebrow">{{ challenge.type }}</p>
+        <h1 id="challenge-title">{{ challenge.title }}</h1>
+        <p>{{ challenge.prompt }}</p>
+        <p class="attempts">{{ attemptsRemaining() }} failed {{ attemptsRemaining() === 1 ? 'try' : 'tries' }} remaining</p>
+      </div>
+
+      @if (challenge.type === 'image-select') {
+        <div class="tile-grid" role="group" [attr.aria-label]="challenge.prompt">
+          @for (option of challenge.options; track option.id) {
+            <button
+              class="tile"
+              type="button"
+              [class.tile--selected]="isSelected(option.id)"
+              [disabled]="isLocked()"
+              [attr.aria-pressed]="isSelected(option.id)"
+              (click)="toggleOption(option.id)"
+            >
+              <span class="tile__symbol" aria-hidden="true">{{ option.symbol }}</span>
+              <span>{{ option.label }}</span>
+            </button>
+          }
+        </div>
+      } @else if (challenge.type === 'single-choice') {
+        <div class="choice-list" role="radiogroup" [attr.aria-label]="challenge.prompt">
+          @for (option of challenge.options; track option.id) {
+            <button
+              class="choice"
+              type="button"
+              role="radio"
+              [class.choice--selected]="isSelected(option.id)"
+              [disabled]="isLocked()"
+              [attr.aria-checked]="isSelected(option.id)"
+              (click)="toggleOption(option.id)"
+            >
+              {{ option.label }}
+            </button>
+          }
+        </div>
+      } @else {
+        <label class="field">
+          <span>Your answer</span>
+          <input
+            [formControl]="textControl"
+            [attr.inputmode]="challenge.type === 'math' ? 'numeric' : 'text'"
+            [type]="challenge.type === 'math' ? 'number' : 'text'"
+            autocomplete="off"
+            [disabled]="isLocked()"
+            aria-describedby="challenge-help challenge-error"
+          />
+        </label>
+      }
+
+      <p class="hint" id="challenge-help">{{ challenge.hint }}</p>
+
+      @if (error()) {
+        <p class="error" id="challenge-error" aria-live="polite">{{ error() }}</p>
+      }
+
+      <div class="challenge__actions">
+        <button class="button button--quiet" type="button" [disabled]="currentPosition() === 1" (click)="previous()">Previous</button>
+        @if (isLocked()) {
+          <button class="button button--primary" type="button" (click)="restart()">Restart challenge</button>
+        } @else {
+          <button class="button button--primary" type="button" (click)="submit()">
+            {{ currentPosition() === total() ? 'Finish challenge' : 'Validate and continue' }}
+          </button>
+        }
+      </div>
+    </section>
+  }
+</main>

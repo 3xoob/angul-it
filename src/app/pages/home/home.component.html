@@ -1,0 +1,39 @@
+<main class="home-shell" id="main-content">
+  <section class="hero" aria-labelledby="home-title">
+    <p class="eyebrow">Human validation lab</p>
+    <h1 id="home-title">Pass four checks that remember where you left off.</h1>
+    <p class="hero__copy">
+      Angul-It runs a randomized CAPTCHA session with visual, math, text, and logic stages. Every answer is validated before the next route opens.
+    </p>
+
+    <div class="hero__actions">
+      @if (hasActiveSession()) {
+        <a class="button button--primary" routerLink="/captcha">Resume challenge</a>
+        <button class="button button--quiet" type="button" (click)="resetAndStart()">Start fresh</button>
+      } @else if (isComplete()) {
+        <a class="button button--primary" routerLink="/result">View result</a>
+        <button class="button button--quiet" type="button" (click)="resetAndStart()">New session</button>
+      } @else {
+        <button class="button button--primary" type="button" (click)="startChallenge()">Start challenge</button>
+      }
+    </div>
+  </section>
+
+  <section class="brief" aria-label="Challenge properties">
+    <article>
+      <span>01</span>
+      <h2>Persistent</h2>
+      <p>Refresh the page and the current stage, attempts, and selected session remain intact.</p>
+    </article>
+    <article>
+      <span>02</span>
+      <h2>Guarded</h2>
+      <p>The result route stays locked until every challenge is completed correctly.</p>
+    </article>
+    <article>
+      <span>03</span>
+      <h2>Randomized</h2>
+      <p>Each new session receives one challenge from each CAPTCHA type.</p>
+    </article>
+  </section>
+</main>
